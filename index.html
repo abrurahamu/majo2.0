@@ -143,12 +143,14 @@
     <span class="heart" style="left:80%; top:25%;">⭐</span>
     <span class="heart" style="left:40%; top:70%;">💖</span>
 
+    <!-- Stickers superiores -->
     <div class="row-top">
       <img src="gatitos6.jpg" class="sticker" alt="Gatitos 6">
       <img src="gatitos4.jpg" class="sticker" alt="Gatitos 4">
       <img src="gatitos2.jpg" class="sticker" alt="Gatitos 2">
     </div>
 
+    <!-- Texto y sticker central -->
     <div class="texto-central">
       <h1 class="titulo-cumple">Feliz cumpleaños majo</h1>
       <p class="dedicatoria-cumple">
@@ -157,9 +159,10 @@
       <img src="gatitos5.jpg" class="center-bot" alt="Gatitos 5">
     </div>
 
+    <!-- Stickers inferiores (con ruta corregida) -->
     <div class="row-bottom">
       <img src="gatitos.jpg" class="sticker" alt="Gatitos">
-      <img src="gatitos 3.jpg" class="sticker" alt="Gatitos 3">
+      <img src="gatitos3.jpg" class="sticker" alt="Gatitos 3">
     </div>
   </div>
 
@@ -176,13 +179,8 @@
           musica = document.getElementById('musica');
 
     btn.onclick = () => {
-      // Desbloquear y reproducir música
       musica.play().catch(() => {});
-
-      // Oculta sticker inicial
       stickerInit.style.display = 'none';
-
-      // Transición inicial
       btn.style.display = 'none';
       gif.style.display = 'block';
       cnt.style.display = 'block';
@@ -208,13 +206,9 @@
     // Confetti animado
     const canvas = document.querySelector('.confetti'),
           ctx = canvas.getContext('2d');
-    function resize() {
-      canvas.width = innerWidth;
-      canvas.height = innerHeight;
-    }
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
     window.addEventListener('resize', resize);
     resize();
-
     const conf = [];
     for (let i = 0; i < 80; i++) {
       conf.push({
