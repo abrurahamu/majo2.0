@@ -15,6 +15,7 @@
       font-family: 'Poppins', sans-serif;
       overflow: hidden;
     }
+    /* Pantalla Inicial */
     #pantalla-inicial {
       position: fixed; inset: 0;
       background: #fff;
@@ -45,6 +46,8 @@
       margin-top: 14px; font-size: 1.1em;
       color: #ad1457; display: none;
     }
+
+    /* Pantalla Cumpleaños */
     .pantalla-cumple {
       display: none; position: relative;
       width: 100vw; height: 100vh;
@@ -54,16 +57,22 @@
       position: absolute; inset: 0;
       pointer-events: none; z-index: 1;
     }
+
+    /* Globos */
     .balloon {
       position: absolute; font-size: 3em;
       opacity: 0.2; animation: float 4s ease-in-out infinite alternate;
       z-index: 1;
     }
     @keyframes float { to { transform: translateY(-20px); } }
+
+    /* Corazones */
     .heart {
       position: absolute; font-size: 2em;
       opacity: 0.15; z-index: 1;
     }
+
+    /* Fila superior */
     .row-top {
       position: absolute; top: 2vh; left: 0; right: 0;
       display: flex; justify-content: space-around; z-index: 3;
@@ -76,6 +85,8 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       z-index: 3;
     }
+
+    /* Texto central */
     .texto-central {
       position: absolute; top: 45%; left: 50%;
       transform: translate(-50%, -50%);
@@ -98,6 +109,8 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       margin: 36px auto 0; z-index: 2;
     }
+
+    /* Fila inferior */
     .row-bottom {
       position: absolute; bottom: 10vh; left: 0; right: 0;
       display: flex; justify-content: space-around; z-index: 3;
@@ -146,7 +159,7 @@
 
     <div class="row-bottom">
       <img src="gatitos.jpg" class="sticker" alt="Gatitos">
-      <img src="gatitos3.jpg" class="sticker" alt="Gatitos 3">
+      <img src="gatitos 3.jpg" class="sticker" alt="Gatitos 3">
     </div>
   </div>
 
@@ -163,8 +176,8 @@
           musica = document.getElementById('musica');
 
     btn.onclick = () => {
-      // Permite reproducción en mobile
-      musica.play().catch(() => { /* ignorar */ });
+      // Desbloquear y reproducir música
+      musica.play().catch(() => {});
 
       // Oculta sticker inicial
       stickerInit.style.display = 'none';
@@ -184,7 +197,6 @@
           setTimeout(() => {
             init.style.display = 'none';
             show.style.display = 'block';
-            // Desmutear justo al revelar
             musica.muted = false;
           }, 300);
         } else {
@@ -196,47 +208,52 @@
     // Confetti animado
     const canvas = document.querySelector('.confetti'),
           ctx = canvas.getContext('2d');
-    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    function resize() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+    }
     window.addEventListener('resize', resize);
     resize();
+
     const conf = [];
-    for (let i=0; i<80; i++){
+    for (let i = 0; i < 80; i++) {
       conf.push({
-        x: Math.random()*innerWidth,
-        y: Math.random()*-innerHeight,
-        r: Math.random()*7+4,
-        d: Math.random()*18+10,
-        c: `hsl(${Math.random()*360},100%,75%)`,
-        tilt: Math.random()*20-10,
-        ang:0,
-        inc: Math.random()*0.08+0.04
+        x: Math.random() * innerWidth,
+        y: Math.random() * -innerHeight,
+        r: Math.random() * 7 + 4,
+        d: Math.random() * 18 + 10,
+        c: `hsl(${Math.random() * 360},100%,75%)`,
+        tilt: Math.random() * 20 - 10,
+        ang: 0,
+        inc: Math.random() * 0.08 + 0.04
       });
     }
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      conf.forEach(o=>{
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      conf.forEach(o => {
         ctx.beginPath();
         ctx.lineWidth = o.r;
         ctx.strokeStyle = o.c;
-        ctx.moveTo(o.x+o.tilt+o.r/3, o.y);
-        ctx.lineTo(o.x+o.tilt, o.y+o.tilt+o.d/2);
+        ctx.moveTo(o.x + o.tilt + o.r / 3, o.y);
+        ctx.lineTo(o.x + o.tilt, o.y + o.tilt + o.d / 2);
         ctx.stroke();
       });
     }
-    function update(){
-      conf.forEach(o=>{
-        o.y += o.d/35;
+    function update() {
+      conf.forEach(o => {
+        o.y += o.d / 35;
         o.ang += o.inc;
-        o.tilt = Math.sin(o.ang)*13;
-        if (o.y > innerHeight){
-          o.x = Math.random()*innerWidth;
+        o.tilt = Math.sin(o.ang) * 13;
+        if (o.y > innerHeight) {
+          o.x = Math.random() * innerWidth;
           o.y = -12;
-          o.tilt = Math.random()*20-10;
+          o.tilt = Math.random() * 20 - 10;
         }
       });
     }
-    (function anim(){
-      draw(); update();
+    (function anim() {
+      draw();
+      update();
       requestAnimationFrame(anim);
     })();
   </script>
